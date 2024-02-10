@@ -21,8 +21,10 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  const answer = number >= 0;
+
+  return answer;
 }
 
 /**
@@ -38,8 +40,18 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  let maxNumber;
+
+  if (a > b && a > c) {
+    maxNumber = a;
+  } else if (b > a && b > c) {
+    maxNumber = b;
+  } else {
+    maxNumber = c;
+  }я
+
+  return maxNumber;
 }
 
 /**
@@ -60,8 +72,20 @@ function getMaxNumber(/* a, b, c */) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  let answer;
+
+  if (
+    king.x === queen.x ||
+    king.y === queen.y ||
+    Math.abs(king.x - queen.x) === Math.abs(king.y - queen.y)
+  ) {
+    answer = true;
+  } else {
+    answer = false;
+  }
+
+  return answer;
 }
 
 /**
@@ -82,8 +106,22 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  let answer;
+
+  if (a <= 0 || b <= 0 || c <= 0) {
+    answer = false;
+  } else if (
+    (a === b && a + b > c) ||
+    (b === c && b + c > a) ||
+    (c === a && c + a > b)
+  ) {
+    answer = true;
+  } else {
+    answer = false;
+  }
+
+  return answer;
 }
 
 /**
@@ -100,8 +138,27 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  const firstArrayRomanNum = ['', 'X', 'XX', 'XXX'];
+  const secondArrayRomanNum = [
+    '',
+    'I',
+    'II',
+    'III',
+    'IV',
+    'V',
+    'VI',
+    'VII',
+    'VIII',
+    'IX',
+  ];
+  const firstPartNum = Math.floor(num / 10);
+  const secondPartNum = num % 10;
+
+  const answer =
+    firstArrayRomanNum[firstPartNum] + secondArrayRomanNum[secondPartNum];
+
+  return answer;
 }
 
 /**
@@ -119,8 +176,73 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let answer = '';
+
+  for (let i = 0; i < numberStr.length; i += 1) {
+    switch (numberStr[i]) {
+      case '0':
+        answer += 'zero';
+        break;
+
+      case '1':
+        answer += 'one';
+        break;
+
+      case '2':
+        answer += 'two';
+        break;
+
+      case '3':
+        answer += 'three';
+        break;
+
+      case '4':
+        answer += 'four';
+        break;
+
+      case '5':
+        answer += 'five';
+        break;
+
+      case '6':
+        answer += 'six';
+        break;
+
+      case '7':
+        answer += 'seven';
+        break;
+
+      case '8':
+        answer += 'eight';
+        break;
+
+      case '9':
+        answer += 'nine';
+        break;
+
+      case '-':
+        answer += 'minus';
+        break;
+
+      case '.':
+        answer += 'point';
+        break;
+
+      case ',':
+        answer += 'point';
+        break;
+
+      default:
+        break;
+    }
+
+    if (i !== numberStr.length - 1) {
+      answer += ' ';
+    }
+  }
+
+  return answer;
 }
 
 /**
@@ -177,7 +299,7 @@ function isContainNumber(/* num, digit */) {
 }
 
 /**
- * Finds the index of an element in an array where the sum of elements to the left equals the sum of elements to the right.
+* Finds the index of an element in an array where the sum of elements to the startCol equals the sum of elements to the lastCol.
  * If such an index does not return -1.
  * In this task, the use of methods of the Array and String classes is not allowed.
  *
