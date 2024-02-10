@@ -257,8 +257,17 @@ function convertNumberToString(numberStr) {
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  const middle = str.length / 2;
+  let answer = true;
+
+  for (let i = 0; i < middle; i += 1) {
+    if (str[i] !== str[str.length - i - 1]) {
+      answer = false;
+    }
+  }
+
+  return answer;
 }
 
 /**
@@ -275,8 +284,16 @@ function isPalindrome(/* str */) {
  *  'qwerty', 'Q'     => -1
  *  'qwerty', 'p'     => -1
  */
-function getIndexOf(/* str, letter */) {
-  throw new Error('Not implemented');
+function getIndexOf(str, letter) {
+  let index = -1;
+
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === letter) {
+      index = i;
+    }
+  }
+
+  return index;
 }
 
 /**
@@ -294,12 +311,22 @@ function getIndexOf(/* str, letter */) {
  *  12345, 0    => false
  *  12345, 6    => false
  */
-function isContainNumber(/* num, digit */) {
-  throw new Error('Not implemented');
+function isContainNumber(num, digit) {
+  const stringNum = String(num);
+  const stringDigit = String(digit);
+  let answer = false;
+
+  for (let i = 0; i < stringNum.length; i += 1) {
+    if (stringNum[i] === stringDigit) {
+      answer = true;
+    }
+  }
+
+  return answer;
 }
 
 /**
-* Finds the index of an element in an array where the sum of elements to the startCol equals the sum of elements to the lastCol.
+ * Finds the index of an element in an array where the sum of elements to the left equals the sum of elements to the right.
  * If such an index does not return -1.
  * In this task, the use of methods of the Array and String classes is not allowed.
  *
@@ -311,8 +338,30 @@ function isContainNumber(/* num, digit */) {
  *  [2, 3, 9, 5] => 2       => 2 + 3 === 5 then balance element is 9 and its index = 2
  *  [1, 2, 3, 4, 5] => -1   => no balance element
  */
-function getBalanceIndex(/* arr */) {
-  throw new Error('Not implemented');
+function getBalanceIndex(arr) {
+  let answer = -1;
+  let leftSum;
+  let rightSum;
+
+  for (let i = 0; i < arr.length; i += 1) {
+    leftSum = 0;
+    rightSum = 0;
+
+    for (let j = 0; j < i; j += 1) {
+      leftSum += arr[j];
+    }
+
+    for (let k = i + 1; k < arr.length; k += 1) {
+      rightSum += arr[k];
+    }
+
+    if (leftSum === rightSum) {
+      answer = i;
+      break;
+    }
+  }
+
+  return answer;
 }
 
 /**
@@ -336,8 +385,46 @@ function getBalanceIndex(/* arr */) {
  *          [10, 9,  8,  7]
  *        ]
  */
-function getSpiralMatrix(/* size */) {
-  throw new Error('Not implemented');
+function getSpiralMatrix(size) {
+  const spiralMatrix = [];
+
+  for (let i = 0; i < size; i += 1) {
+    spiralMatrix[i] = [];
+  }
+
+  let startRow = 0;
+  let startCol = 0;
+  let lastRow = size - 1;
+  let lastCol = size - 1;
+  let value = 1;
+
+  while (startCol <= lastCol && startRow <= lastRow) {
+    for (let i = startCol; i <= lastCol; i += 1) {
+      spiralMatrix[startRow][i] = value;
+      value += 1;
+    }
+    startRow += 1;
+
+    for (let i = startRow; i <= lastRow; i += 1) {
+      spiralMatrix[i][lastCol] = value;
+      value += 1;
+    }
+    lastCol -= 1;
+
+    for (let i = lastCol; i >= startCol; i -= 1) {
+      spiralMatrix[lastRow][i] = value;
+      value += 1;
+    }
+    lastRow -= 1;
+
+    for (let i = lastRow; i >= startRow; i -= 1) {
+      spiralMatrix[i][startCol] = value;
+      value += 1;
+    }
+    startCol += 1;
+  }
+
+  return spiralMatrix;
 }
 
 /**
@@ -355,8 +442,26 @@ function getSpiralMatrix(/* size */) {
  *    [7, 8, 9]         [9, 6, 3]
  *  ]                 ]
  */
-function rotateMatrix(/* matrix */) {
-  throw new Error('Not implemented');
+function rotateMatrix(matrix) {
+  const copyMatrix = matrix;
+  const newMatrix = [];
+
+  for (let i = 0; i <= matrix.length - 1; i += 1) {
+    newMatrix[i] = [];
+    let k = 0;
+    for (let j = matrix.length - 1; j >= 0; j -= 1) {
+      newMatrix[i][k] = matrix[j][i];
+      k += 1;
+    }
+  }
+
+  for (let i = 0; i < matrix.length; i += 1) {
+    for (let j = 0; j < matrix.length; j += 1) {
+      copyMatrix[i][j] = newMatrix[i][j];
+    }
+  }
+
+  return copyMatrix;
 }
 
 /**
