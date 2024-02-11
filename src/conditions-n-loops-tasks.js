@@ -49,7 +49,7 @@ function getMaxNumber(a, b, c) {
     maxNumber = b;
   } else {
     maxNumber = c;
-  }я
+  }
 
   return maxNumber;
 }
